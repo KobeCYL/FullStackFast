@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  fe-app:
+    image: fe-container:1.0
+    ports:
+      - 9529:80
+    depends_on:
+      - nest-app
+    restart: always
+    networks:
+      - common-network
+  nest-app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql-container
+    restart: always
+    ports:
+      - 3005:3005
+    networks:
+      - common-network
+  mysql-container:
+    image: mysql
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 33066:3306
+    environment:
+      MYSQL_DATABASE: fast_gpt_database
+      MYSQL_ROOT_PASSWORD: 9528
+    networks:
+      - common-network
+networks:
+  common-network:
+    driver: bridge
