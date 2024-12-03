@@ -10,6 +10,9 @@ import * as moment from 'moment-timezone';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DictionaryModule } from './dictionary/dictionary.module';
 import * as path from 'path';
+
+const env = process.env.NODE_ENV;
+const configFilePath = env === 'dev' ? 'dev.env' : '.env';
 @Module({
   imports: [
     ConfigModule.forRoot({
