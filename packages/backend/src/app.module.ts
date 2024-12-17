@@ -10,6 +10,9 @@ import * as moment from 'moment-timezone';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DictionaryModule } from './dictionary/dictionary.module';
 import * as path from 'path';
+import { DifyModule } from './dify/dify.module';
+import { DifyController } from './dify/dify.controller';
+import { DifyService } from './dify/dify.service';
 
 const env = process.env.NODE_ENV;
 const configFilePath = env === 'dev' ? 'dev.env' : '.env';
@@ -58,9 +61,10 @@ const configFilePath = env === 'dev' ? 'dev.env' : '.env';
       },
       inject: [ConfigService],
     }),
+    DifyModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, DifyController],
+  providers: [AppService, DifyService],
 })
 export class AppModule {
   constructor() {
