@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  nest-fe:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 9529:80
+    restart: always    

@@ -1,0 +1,2 @@
+packages:
+  - "packages/*"  # 工作区中的所有子包路径
